@@ -1,10 +1,4 @@
-# 这个工作流使用了一些非GitHub认证的actions
-# 它们是由第三方提供的，受不同的服务条款、隐私政策和支持文档的约束
-# GitHub建议你把actions固定到一个commit SHA
-# 如果你想要更新版本，你需要修改SHA
-# 你也可以引用一个标签或分支，但是action可能会在没有警告的情况下改变
-
-name: Java CI
+name: Android CI
 
 on: [push]
 
@@ -28,3 +22,9 @@ jobs:
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: build
+          
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/*.apk
